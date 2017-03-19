@@ -2,41 +2,33 @@
 			$host = "localhost";
 			$user = "test";
 			$pass = "t3st3r123";
-			$db = "test";
-		
+			$db = "test";		
 
 			$l = mysqli_connect($host, $user, $pass, $db);
 			mysqli_query($l, "SET CHARACTER SET UTF8") or
 					die("Error, ei saa andmebaasi charsetti seatud");
 								
-			$result = mysqli_query($l, "SELECT * FROM 10162828_andmed");
+			$result = mysqli_query($l, "SELECT * FROM 10162828_andmed WHERE id=200");
+			
+			$sql = "SELECT * FROM 10162828_andmed WHERE id=200";
 		
 			$table = '10162828_andmed';
 			$fields_num = mysqli_num_fields($result);
 
-			$koeratoug= mysqli_real_escape_string($link, $_REQUEST['koeratouk']);
-			$koerapilt = mysqli_real_escape_string($link, $_REQUEST['koerapilt']);
-			$koera_kirjeldus = mysqli_real_escape_string($link, $_REQUEST['kirjeldus']);
-					
+			//$row = mysqli_fetch_array($result) or die("not working");
+			//$s=$row['pilt'];
+			//echo '<img src="data:image/jpeg;base64,'.base64_encode( $result['pilt'] ).'"/>';
+			//echo '<img src="data:image/jpeg;base64,'.base64_encode( $s).'"/>';
 			
-			//ANDMETE LISAMINE
-			$sql = "INSERT INTO 10162828_andmed (data, pilt, kirjeldus) VALUES ('$koeratoug', '$koerapilt', '$koera_kirjeldus')";
-			if (mysqli_query($l, $sql)) {
-				echo "New record created successfully";
-			} else {
-				echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-			}
-									
-			mysqli_close($l);
+			//print_r($s);
+			//echo '<img src="data:image/jpeg;base64,'.$s.'" alt="HTML5 Icon" style="width:128px;height:128px">';
 			
-			echo phpversion();	
+			$sth = $l->query($sql);
+			$result2=mysqli_fetch_array($sth);
+			//print_r($result2);
+			echo '<img src="data:image/jpeg;charset=utf-8;base64,'.base64_encode( $result2['pilt'] ).'"/>';
 			
-			
-			
-			
-			
-			
-			
+			/*
 			echo "<h1>Table: {$table}</h1>";
 			echo "<table><tr>";
 			// printing table headers
@@ -59,7 +51,8 @@
 				echo "</tr>\n";
 			}
 			echo "</table>\n";
+			*/
+			
 			mysqli_free_result($result);	
 			
-			
-		?>
+?>

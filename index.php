@@ -3,32 +3,42 @@
 	<head>
 		<link rel="stylesheet" type="text/css" href="css/style.css" />
 		<meta charset="UTF-8">
-		<title>Hello there</title>
+		<title>Dog's page</title>
 	</head>
 
 	<body>
-		<h1>Hi there!</h1>
-		<p><img alt= "esimene pilt" src="images/pilt.jpg"></p>
 		
-		<h1>The End!!! !!!!</h1>
 		
 	<p>
-		<form method="post">
-			<input type="submit" name="lisa-tabelisse" action="mysql.php" value="Lisa andmed" />
+		
+		<form action="koer.php" method="post" enctype="multipart/form-data">
+			<table>
+				<thead>
+					<tr>
+						<th>Koera ID</th>
+						<th>Koeratõuk</th>
+						<th>Koerapilt</th>
+						<th>Kirjeldus</th>
+					</tr>
+				</thead>
+				<tr>
+					<td><input type="text" name="koeraid"></td>
+					<td><input type="text" name="koeratouk"></td>					
+					<td><input type="file" name="koerapilt"></td>					
+					<td><input type="text" name="kirjeldus"></td>					
+				</tr>
+			</table>				
+			<input type="submit" name="lisa-tabelisse" value="Lisa andmed" />
 		</form>
 	</p>
 	
 	<p>
-		<form method="post">
-			<input type="submit" name="kustuta-tabelist" value="Kustuta andmed" />
+		<form method="GET" action="pilt.php" >
+			<input type="submit" name="display_db" value="Näita kõike">
 		</form>
 	</p>
+	
 
-		
-	<?php 
-include 'mysql.php';
-?> 
-		
 		<script src="myscripts.js"></script>
 		
 		

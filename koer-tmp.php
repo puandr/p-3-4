@@ -13,26 +13,36 @@
 		
 			$table = '10162828_andmed';
 			$fields_num = mysqli_num_fields($result);
+			
+			if( $_POST ) {
 
-			$koeratoug= mysqli_real_escape_string($link, $_REQUEST['koeratouk']);
-			$koerapilt = mysqli_real_escape_string($link, $_REQUEST['koerapilt']);
-			$koera_kirjeldus = mysqli_real_escape_string($link, $_REQUEST['kirjeldus']);
-					
+				print_r($_FILES);
 			
-			//ANDMETE LISAMINE
-			$sql = "INSERT INTO 10162828_andmed (data, pilt, kirjeldus) VALUES ('$koeratoug', '$koerapilt', '$koera_kirjeldus')";
-			if (mysqli_query($l, $sql)) {
-				echo "New record created successfully";
-			} else {
-				echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+				$imagename=$_FILES['koerapilt']['name'];
+				$imagetmp = addslashes (file_get_contents($_FILES['koerapilt']['tmp_name']));
+				
+				
+				$form_koeratouk = $_POST['koeratouk'];
+				$form_pilt = $_POST['koerapilt'];
+				$form_kirjeldus = $_POST['kirjeldus'];
+				
+				//$koeratoug= mysqli_real_escape_string($l, $_REQUEST['data']);
+				//$koerapilt = mysqli_real_escape_string($l, $_REQUEST['pilt']);
+				//$koera_kirjeldus = mysqli_real_escape_string($l, $_REQUEST['kirjeldus']);	
+				
+				//ANDMETE LISAMINE
+				$sql = "INSERT INTO 10162828_andmed (data, pilt, kirjeldus) VALUES ('$form_koeratouk', '$imagetmp', '$form_kirjeldus')";
+				if (mysqli_query($l, $sql)) {
+					echo "New record created successfully";
+				} else {
+					echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+				}
+										
+				mysqli_close($l);
+				
+				echo phpversion();			
+			
 			}
-									
-			mysqli_close($l);
-			
-			echo phpversion();	
-			
-			
-			
 			
 			
 			
@@ -62,4 +72,4 @@
 			mysqli_free_result($result);	
 			
 			
-		?>
+?>
